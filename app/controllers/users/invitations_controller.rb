@@ -1,5 +1,7 @@
 class Users::InvitationsController < Devise::InvitationsController
-
+ 
+  respond_to :html, :js
+  
   def edit
     render :edit, :layout => false
   end
@@ -12,9 +14,9 @@ class Users::InvitationsController < Devise::InvitationsController
       set_flash_message :notice, flash_message
       sign_in(resource_name, resource)
  
-      redirect_to '/profile', :alert => "Welcome! Please fill out your profile and upload a headshot."
+      redirect_to edit_user_registration_path#, :alert => "Welcome! Please fill out your profile and upload a headshot." 
     else
-      respond_with_navigational(resource){ render :edit, :layout => false }
+       respond_with_navigational(resource){ render :edit, :layout => false }
     end
   end
   
@@ -41,10 +43,9 @@ class Users::InvitationsController < Devise::InvitationsController
 private
 
   def user_param
-     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :invitation_token )
+     params.require(:user).permit(:email, :password, :password_confirmation, :invitation_token )
   end
 
-  # this is called when creating invitation
   # should return an instance of resource class
   def invite_resource
     ## skip sending emails on invite

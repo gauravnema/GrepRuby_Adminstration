@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 20140606105015) do
     t.string   "last_name"
     t.string   "gender"
     t.datetime "dob"
-    t.integer  "mobile"
-    t.integer  "family_member_mobile"
+    t.string   "mobile"
+    t.string   "family_member_mobile"
     t.string   "address"
     t.string   "image"
     t.datetime "created_at"
@@ -80,6 +80,10 @@ ActiveRecord::Schema.define(version: 20140606105015) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

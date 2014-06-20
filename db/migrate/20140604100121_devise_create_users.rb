@@ -34,8 +34,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :last_name
       t.string   :gender
       t.datetime :dob
-      t.integer  :mobile
-      t.integer  :family_member_mobile
+      t.string  :mobile
+      t.string  :family_member_mobile
       t.string   :address
       t.string   :image
 

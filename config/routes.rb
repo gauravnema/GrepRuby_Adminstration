@@ -1,30 +1,34 @@
 Rails.application.routes.draw do
   
-  
- 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  root 'welcomes#index'
   
   #resources :users do
   #  resources :invitations, :controller => "users/invitations"
   #end
+ 
+  #resources :users, :except => :new
   
   resources :welcomes
-  devise_for :users,
-    :controllers => {
-      :sessions => "users_sessions",
-      :registrations => "user_registrations",
-      :passwords => "user_passwords",
-      # Proper invitations should be sent through the active_admin interface.
+  devise_for :users, :controllers => {
       :invitations => 'users/invitations' # user_invitations_controller.rb
-    }
+      }, :skip => [:registrations]
+      as :user do
+        get   'users/cancel' => 'devise_invitable/registrations#cancel' , :as => 'cancel_user_registration'
+        post  'users' => 'devise_invitable/registrations#create' , :as => 'user_registration'
+        get   'users/edit' => 'devise_invitable/registrations#edit' , :as => 'edit_user_registration'
+        patch 'users' => 'devise_invitable/registrations#update'
+        put   'users' => 'devise_invitable/registrations#update'
+        delete 'users' => 'devise_invitable/registrations#destroy'
+      end
+      
  
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
     
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcomes#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

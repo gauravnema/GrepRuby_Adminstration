@@ -14,6 +14,19 @@ ActiveAdmin.register User do
   #  permitted
   # end
   
+  index do  
+    column :id
+    column :first_name
+    column :last_name
+    column :gender
+    column :dob
+    column :mobile
+    column :family_member_mobile
+    column :email
+    column :address
+    actions
+  end 
+  
   form do |f|
     f.inputs "Create User" do
       f.input :first_name
@@ -25,7 +38,6 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :address
-      
       end
     f.actions
   end
@@ -36,10 +48,10 @@ ActiveAdmin.register User do
  
   collection_action :new_invitation do
     @user = User.new
-      
   end
+  
   def show
-  @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
   
   def create                        #perform task
@@ -53,13 +65,13 @@ ActiveAdmin.register User do
   end  
   
   def index
-  @user = User.all
+    @user = User.all
  
   end
  
   collection_action :send_invitation, :method => :post do
    
-    @user = User.invite!(params.require(:user).permit(:first_name, :last_name, :email))
+    @user = User.invite!(params.require(:user).permit(:first_name, :last_name, :email , :invitation_token))
     if @user.errors.empty?
       flash[:success] = "User has been successfully invited."
       redirect_to admin_root_path
@@ -69,6 +81,15 @@ ActiveAdmin.register User do
       redirect_to admin_root_path
     end
   end
+  
+  filter :first_name
+  filter :last_name
+  filter :gender
+  filter :dob
+  filter :mobile
+  filter :family_member_mobile
+  filter :email
+  filter :address
   
   
 end
