@@ -22,29 +22,23 @@
     
   <div>
     <%= f.label :DOB %><br />    
-   
-    <div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
-    </div>
-</div>
+    <div class="well">
+      <div id="datetimepicker1" class="input-append date">
+        <input data-format="dd/MM/yyyy" type="text" class="textbox-size" placeholder="DOB"></input>
+        <span class="add-on">
+          <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-calendar">
+          </i>
+        </span>
+      </div>
   </div>
-
-
-    
+  <script type="text/javascript">
+    $(function() {
+      $('#datetimepicker1').datetimepicker({
+        language: 'pt-BR'
+      });
+    });
+  </script>        
+  </div>    
   <div><%= f.label :mobile %><br />
     <%= f.text_field :mobile , :placeholder => "Mobile", :class=>'textbox-size'%></p></div>
     
@@ -66,9 +60,6 @@
 <br/>
   <div><%= f.submit "Update" %></div>
 <% end %>
-<style>
-
-</style>
 
 
 

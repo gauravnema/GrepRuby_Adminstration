@@ -1,35 +1,31 @@
-<link rel="stylesheet" type="text/css" href="home/rails_work/GrepRuby_Adminstration/app/assets/style.css">
-
 <div class="navbar-wrapper">
-      <div class="container">
-
-        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              
-              <a class="navbar-brand" href="#">Grep Ruby Adminstration</a>
-            </div>
-            <div class="navbar-collapse collapse tab-right">
-              <ul class="nav navbar-nav center"  >
-              <% if user_signed_in? %>
-                <li >Hi <%= current_user.first_name %></li>
-                 <li><a href="javascript:void(0)"><%= link_to "Sign out", destroy_user_session_path , method: :DELETE %></a></li>
-                  <%end%>
-                  <% if !user_signed_in? %>
-                <li class="active"><a href="/users/sign_in">Sign in</a></li>
-                 <%end%>            
-                
-              </ul>
-            </div>
-          </div>
-        </div>
-
+<div class="container">
+  <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+        <a class="navbar-brand" href="#">Grep Ruby Adminstration</a>
+      </div>
+      <div class="navbar-collapse collapse tab-right">
+        <ul class="nav navbar-nav center"  >
+          <% if user_signed_in? %>
+            <li >Hi <%= current_user.first_name %></li>
+            <li><a href="javascript:void(0)"><%= link_to "Sign out", destroy_user_session_path , method: :DELETE %></a></li>
+          <%end%>
+          <% if !user_signed_in? %>
+            <li class="active"><a href="/users/sign_in">Sign in</a></li>
+          <%end%>            
+          
+        </ul>
       </div>
     </div>
+  </div>
+</div>
+</div>
 
