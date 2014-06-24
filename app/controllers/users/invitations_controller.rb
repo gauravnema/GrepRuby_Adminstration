@@ -1,13 +1,14 @@
 class Users::InvitationsController < Devise::InvitationsController
  
   respond_to :html, :js
-  
-  def edit
+      
+  def edit  
     render :edit, :layout => false
   end
  
   # PUT /resource/invitation
   def update
+    
     self.resource = resource_class.accept_invitation!(user_param)
     if resource.errors.empty?
       flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
@@ -26,6 +27,7 @@ class Users::InvitationsController < Devise::InvitationsController
   
   def show
     @user=User.find(params[:id])
+     authorize! :read, @user
   end
   
  def create

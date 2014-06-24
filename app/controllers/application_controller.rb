@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
 
   def update_sanitized_params
-    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:first_name, :last_name, :gender, :dob, :mobile, :family_member_mobile, :address, :current_password)}
+    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:first_name, :last_name, :gender, :dob, :mobile, :family_member_mobile, :address, :current_password, :email, :avatar)}
   end 
 
 

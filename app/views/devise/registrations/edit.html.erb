@@ -18,13 +18,16 @@
     <%= f.text_field :last_name , :class=>'textbox-size' %></p></div>
         
   <div><%= f.label :gender %><br />
-    <%= f.text_field :gender , :placeholder => "Male/Female",:class=>'textbox-size'%></p></div>
-    
+    <%= f.text_field :gender , :placeholder => "Male/Female",:class=>'textbox-size'%></p></div> 
+  <div>
+    <%= f.label :Image %><br />
+    <%= f.file_field :avatar %>
+  </div>
   <div>
     <%= f.label :DOB %><br />    
     <div class="well">
       <div id="datetimepicker1" class="input-append date">
-        <input data-format="dd/MM/yyyy" type="text" class="textbox-size" placeholder="DOB"></input>
+        <input data-format="dd/MM/yyyy" type="text" class="textbox-size" placeholder="DOB" name="user[dob]" value="<%=resource.dob.strftime('%d/%m/%Y')%>"></input>
         <span class="add-on">
           <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-calendar">
           </i>

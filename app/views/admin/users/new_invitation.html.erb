@@ -14,6 +14,10 @@
         <td><%= f.label :email %></td>
         <td><%= f.text_field :email, :required => true %></td>
       </tr>
+      <tr>
+        <td><%= f.label :user_type %></td>        
+        <td><%= f.select :user_type, options_for_select(%w[admin user ]) %></td>
+      </tr>
   </table>
   <%= f.submit "Send an Invitation" %>
 <% end %>

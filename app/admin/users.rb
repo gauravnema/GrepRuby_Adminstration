@@ -14,6 +14,8 @@ ActiveAdmin.register User do
   #  permitted
   # end
   
+  permit_params :first_name, :last_name, :email , :user_type, :gender, :dob, :mobile, :family_member_mobile, :address, :avatar
+  
   index do  
     column :id
     column :first_name
@@ -24,6 +26,8 @@ ActiveAdmin.register User do
     column :family_member_mobile
     column :email
     column :address
+    column :user_type
+    column :avatar
     actions
   end 
   
@@ -32,12 +36,12 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :gender
-      f.input :dob
+      f.input :dob , :as => :datepicker
       f.input :mobile
       f.input :family_member_mobile
-      f.input :email
-      f.input :password
       f.input :address
+      f.input :user_type
+      f.input :avatar, :as => :file
       end
     f.actions
   end
@@ -52,6 +56,7 @@ ActiveAdmin.register User do
   
   def show
     @user = User.find(params[:id])
+    
   end
   
   def create                        #perform task
@@ -68,10 +73,20 @@ ActiveAdmin.register User do
     @user = User.all
  
   end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update_without_password(permitted_params[:user])
+    if @user.errors.blank?
+      redirect_to admin_users_path, :notice => "User updated successfully."
+    else
+      render :edit
+    end
+  end
  
   collection_action :send_invitation, :method => :post do
    
-    @user = User.invite!(params.require(:user).permit(:first_name, :last_name, :email , :invitation_token))
+    @user = User.invite!(params.require(:user).permit(:first_name, :last_name, :email , :user_type,:invitation_token))
     if @user.errors.empty?
       flash[:success] = "User has been successfully invited."
       redirect_to admin_root_path
@@ -90,6 +105,7 @@ ActiveAdmin.register User do
   filter :family_member_mobile
   filter :email
   filter :address
+  filter :user_type
   
   
 end
